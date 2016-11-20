@@ -11,6 +11,8 @@ Set-up for the SlackBot is simple. You'll need the following to get started:
 Step 1: Navigate to SlackBot directory
 Step 2: Launch setup script, including your api token and jira credentials as arguments
 
-[>> python setup.py [TOKEN] [JIRA USER] [JIRA PASS]]
+...
+>> python setup.py [TOKEN] [JIRA USER] [JIRA PASS]
+...
 
 More to come...
