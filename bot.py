@@ -47,6 +47,8 @@ class SlackBot(SlackClient):
 				self.control_flow(msg, type, command)
 			except WebSocketConnectionClosedException:
 				self.connect(is_reconnect=True)
+			except ValueError:
+				pass
 
 			time.sleep(interval)
 
@@ -63,4 +65,4 @@ class SlackBot(SlackClient):
 		elif msg['type'] != type:
 			return
 		else:
-			command()
+			command(msg['channel'], msg['text'], msg[''])
