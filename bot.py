@@ -1,3 +1,5 @@
+import json
+
 from utils import get_slack_token
 from configparser import SafeConfigParser
 from slackclient import SlackClient
@@ -24,10 +26,10 @@ class SlackBot(SlackClient):
 	def talk(self, as_user=True, **kwargs):
 		"""Makes a chat post message api call to slack.
 		Args:
-				as_user -> bool	:	Whether or not to include the bot's profile in
-														the message
-				channel -> str 	:	channel to post message to
-				text	-> str 	: 	Message to send
+			as_user -> bool	:	Whether or not to include the bot's profile in 
+			the message
+			channel -> str 	:	channel to post message to
+			text	-> str 	: 	Message to send
 		"""
 		return self.api_call('chat.postMessage', as_user=as_user, **kwargs)
 
@@ -35,3 +37,13 @@ class SlackBot(SlackClient):
 		"""Connects to Slack API. Set is_reconnect to True in case of 
 		timeout."""
 		return self.rtm_connect(is_reconnect)
+
+	def listen(self, interval=1):
+		while True:
+			self.connect(is_reconnect=True)			# Ensure socket connection
+			msg = json.loads(self.server.websocket_safe_read())
+			self.control_flow(msg)
+			time.sleep(interval)
+
+	def control_flow(self, msg):
+		pass
