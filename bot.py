@@ -26,10 +26,10 @@ class SlackBot(SlackClient):
 	def talk(self, as_user=True, **kwargs):
 		"""Makes a chat post message api call to slack.
 		Args:
-			as_user -> bool	:	Whether or not to include the bot's profile in 
-			the message
-			channel -> str 	:	channel to post message to
-			text	-> str 	: 	Message to send
+			as_user -> bool		:	Whether or not to include the bot's profile 
+									in the message
+			channel -> str 		:	channel to post message to
+			text	-> str 		: 	Message to send
 		"""
 		return self.api_call('chat.postMessage', as_user=as_user, **kwargs)
 
