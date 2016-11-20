@@ -65,4 +65,4 @@ class SlackBot(SlackClient):
 		elif msg['type'] != type:
 			return
 		else:
-			command(msg['channel'], msg['text'], msg[''])
+			command(**msg)
