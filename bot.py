@@ -1,11 +1,12 @@
 import json
+import os
 
 from utils import get_slack_token
 from configparser import SafeConfigParser
 from slackclient import SlackClient
 
-CURRENT_DIRECTORY = __file__.strip('/bot.py')
-DATABASE_CONFIG_FILEPATH = CURRENT_DIRECTORY + r'credentials.cfg'
+CURRENT_DIRECTORY = os.path.dirname(__file__)
+DATABASE_CONFIG_FILEPATH = CURRENT_DIRECTORY + r'\credentials.cfg'
 
 
 def credentials_parser(file_path=DATABASE_CONFIG_FILEPATH):
