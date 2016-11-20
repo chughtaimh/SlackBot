@@ -51,13 +51,16 @@ class SlackBot(SlackClient):
 			time.sleep(interval)
 
 	def control_flow(self, msg, type, command):
-		"""Controls flow of events based on message type."""
+		"""Controls flow of events based on message :type:. If a message of type
+		:type: is detected, :command: function is executed.
+		args:
+			msg 	-> dict		:	json message object from self.listen
+			type 	-> str 		: 	message type
+			command -> function	:	command to execute when :type: is detected
+		"""
 		if not msg: 						
 			return
 		elif msg['type'] != type:
 			return
 		else:
 			command()
-
-
-		
