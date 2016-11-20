@@ -38,12 +38,26 @@ class SlackBot(SlackClient):
 		timeout."""
 		return self.rtm_connect(is_reconnect)
 
-	def listen(self, interval=1):
+	def listen(self, type, command, interval=1):
+		"""Opens socket connection to Slack API and listens for incoming events
+		every :interval: seconds."""
 		while True:
-			self.connect(is_reconnect=True)			# Ensure socket connection
-			msg = json.loads(self.server.websocket_safe_read())
-			self.control_flow(msg)
+			try:
+				msg = json.loads(self.server.websocket_safe_read())
+				self.control_flow(msg, type, command)
+			except WebSocketConnectionClosedException:
+				self.connect(is_reconnect=True)
+
 			time.sleep(interval)
 
-	def control_flow(self, msg):
-		pass
+	def control_flow(self, msg, type, command):
+		"""Controls flow of events based on message type."""
+		if not msg: 						
+			return
+		elif msg['type'] != type:
+			return
+		else:
+			command()
+
+
+		
