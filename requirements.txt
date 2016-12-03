@@ -1,3 +1,4 @@
 Requirements:
+Python==2.7.x
 configparser==3.5.0
 slackclient==1.0.2
